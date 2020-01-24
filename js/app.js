@@ -18,8 +18,8 @@ for (let index = 1; index < tmpStr.length; index++) {
     result = result*result1;
    
 }
-
+console.log('Произведение чисел: ',result);
 result = result**3;
 result = result.toString();
 
-console.log(result.substring(0,2));
+console.log('Первые два символа после возведения в степень: ',result.substring(0,2));
