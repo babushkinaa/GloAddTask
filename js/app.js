@@ -48,43 +48,59 @@ function addNull(nummer){
 }
 
 let datevar = new Date(),
-    hour = datevar.getHours() + ' '+num2str(datevar.getHours,['час', 'часов', 'часа']),
+    hour = datevar.getHours() + ' '+num2str(datevar.getHours,['час', 'часа', 'часов']),
     minute = datevar.getMinutes() + ' '+num2str(datevar.getMinutes,['минут', 'минуты', 'минут']),
-    second = datevar.getSeconds()+ ' '+num2str(datevar.getSeconds,['секунд', 'секунды', 'секунд']);
+    second = datevar.getSeconds()+ ' '+num2str(datevar.getSeconds,['секунд', 'секунды', 'секунд']),
+    day = datevar.getDate(),
+    month = datevar.getMonth()+1,
+    year = datevar.getFullYear();
+
+    console.log('day: ', day,month,year);
 
 let options = {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
   weekday: 'long',
-  timezone: 'UTC',
+//   timezone: 'UTC',
 
 };
 let time = function(){
+    datevar = new Date();
     return addNull(datevar.getHours())+':'+addNull(datevar.getMinutes())+':'+addNull(datevar.getSeconds());
 }
 
 let datez = function(){
-    return addNull(datevar.getDay())+'.'+addNull(datevar.getMonth())+'.'+addNull(datevar.getFullYear());
+    datevar = new Date();
+    return addNull(day)+'.'+addNull(month)+'.'+addNull(year);
 }
+console.log(datevar.hour);
 
 
-
-document.write( datevar.toLocaleString("ru", options) + ' '+ hour +' '+minute+' '+second+'<br>'); 
-document.write( datez()+ '-' + time()); 
+showMonitor = () => {
+    day = datevar.getDate(),
+    month = datevar.getMonth()+1,
+    year = datevar.getFullYear();
+    document.write( datevar.toLocaleString("ru", options) + ' '+ hour +' '+minute+' '+second+'<br>'); 
+    document.write( time()+ '-' + datez()); 
+};
+showMonitor();
+// document.write( datevar.toLocaleString("ru", options) + ' '+ hour +' '+minute+' '+second+'<br>'); 
+// document.write( time()+ '-' + datez()); 
 
 let clock = document.querySelector('.clock');
 console.dir(clock);
 let i =1;
-clock.setAttribute('value',datez()+ '-' + time());
+// clock.setAttribute('value',datez()+ '-' + time());
 function showDateTime(){
         
-        return clock.value = datez()+ '-' + time();
+        clock.value = datez()+ '-' + time();
         // clock.getAttribute('value');
-        console.log('clock: ', clock.getAttribute('value'));
+        // console.log('clock: ', clock.getAttribute('value'));
     
 }
 
 window.setInterval(function(){
     showDateTime();
 },1000);
+
